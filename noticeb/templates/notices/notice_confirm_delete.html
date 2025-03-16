@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}Delete Notice - Class Notice Board{% endblock %}
+
+{% block content %}
+    <h1>Delete Notice</h1>
+    
+    <p>Are you sure you want to delete "{{ notice.title }}"?</p>
+    
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Yes, Delete</button>
+    </form>
+    
+    <a href="{% url 'notice_list' %}">Cancel</a>
+{% endblock %}

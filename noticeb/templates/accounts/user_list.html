@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %}User Management - Class Notice Board{% endblock %}
+
+{% block content %}
+    <h1>User Management</h1>
+    
+    <p>
+        <a href="{% url 'create_user' %}" class="button">Add New User</a>
+    </p>
+    
+    <table border="1" style="width: 100%;">
+        <thead>
+            <tr>
+                <th>Username</th>
+                <th>Role</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user_instance in users %}
+    <tr>
+        <td>{{ user_instance.username }}</td>
+        <td>{{ user_instance.get_user_type_display }}</td>
+        <td>
+            {% if user.id != user_instance.id %}
+                <a href="{% url 'delete_user' user_instance.id %}" class="button">Delete</a>
+            {% else %}
+                <span>Current user</span>
+            {% endif %}
+        </td>
+    </tr>
+{% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

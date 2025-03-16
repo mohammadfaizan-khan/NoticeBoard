@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block title %}Notices - Class Notice Board{% endblock %}
+
+{% block content %}
+    <h1>Notices</h1>
+    
+    {% if user.is_teacher or user.is_admin %}
+        <p>
+            <a href="{% url 'create_notice' %}" class="button">Create New Notice</a>
+        </p>
+    {% endif %}
+    
+    {% if notices %}
+        {% for notice in notices %}
+            <div class="notice">
+                <div class="notice-header">
+                    <h2>{{ notice.title }}</h2>
+                    <small>Posted by {{ notice.author.username }} on {{ notice.created_at|date:"M d, Y" }}</small>
+                </div>
+                <div class="notice-content">
+                    <p>{{ notice.content }}</p>
+                </div>
+                {% if user.is_admin or user == notice.author %}
+                    <div class="notice-actions">
+                        <a href="{% url 'delete_notice' notice.pk %}" class="button">Delete</a>
+                    </div>
+                {% endif %}
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>No notices available.</p>
+    {% endif %}
+{% endblock %}

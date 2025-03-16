@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}Create Notice - Class Notice Board{% endblock %}
+
+{% block content %}
+    <h1>Create Notice</h1>
+    
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Save Notice</button>
+    </form>
+    
+    <a href="{% url 'notice_list' %}">Back to Notices</a>
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}Delete User - Class Notice Board{% endblock %}
+
+{% block content %}
+    <h1>Delete User</h1>
+    
+    <p>Are you sure you want to delete user "{{ user_to_delete.username }}" ({{ user_to_delete.get_user_type_display }})?</p>
+    
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="button">Yes, Delete User</button>
+    </form>
+    
+    <a href="{% url 'user_list' %}">Cancel</a>
+{% endblock %}
